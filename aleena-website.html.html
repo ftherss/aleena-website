@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleena Princess - Roses of Love</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #ffe6f2, #ffb3d9);
+            color: #d63384;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .rose-bg {
+            background-image: url('https://i.imgur.com/4Q8Z8Z8.png'); /* Placeholder rose image; replace with a real one if needed */
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        button {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #ff1493;
+        }
+        .game-area {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #d63384;
+        }
+        .falling-item {
+            position: absolute;
+            font-size: 2em;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            from { top: -50px; }
+            to { top: 100%; }
+        }
+        .panda-game-area {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            margin: 20px auto;
+            background: #f0f8ff;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #d63384;
+        }
+        .panda {
+            width: 200px;
+            height: auto;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .collect-item {
+            position: absolute;
+            font-size: 2em;
+            cursor: pointer;
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .gift-card {
+            width: 300px;
+            height: 200px;
+            background: #ff69b4;
+            margin: 20px auto;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            overflow: auto; /* Allow scrolling if content overflows */
+        }
+        .gift-card:hover {
+            transform: scale(1.05);
+        }
+        #giftMessage {
+            font-size: 24px;
+            line-height: 1.2;
+            white-space: pre-wrap; /* Preserve line breaks */
+        }
+        .hidden {
+            display: none;
+        }
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="page1" class="page active">
+        <div class="rose-bg">
+            <h1>🌹 For My Aleena Princess 🌹</h1>
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cute roses bouquet">
+            <p>Dear Aleena, my princess of roses,<br><br>
+            I am deeply sorry for the times I've let you down, for the words unspoken and the moments missed. You are the bloom in my garden of life, the one who makes every petal of my heart unfold with joy. I love you more than words can capture—your smile lights up my world like a thousand roses in full bloom. Forgive my shortcomings; I promise to cherish you forever, to water our love with care and watch it grow. You are my everything, my sweet Aleena. Let's dance in the petals of eternity together. I love you endlessly.<br><br>
+            Yours forever,<br>Your devoted prince.</p>
+            <button onclick="nextPage(2)">Next</button>
+        </div>
+    </div>
+
+    <div id="page2" class="page">
+        <div class="rose-bg">
+            <h1>🌹 Catch the Love! 🌹</h1>
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cute hearts and kisses">
+            <p>Move your mouse or tap to catch the falling kisses and hearts! Score as many as you can in 10 seconds.</p>
+            <div class="game-area" id="gameArea">
+                <div id="score">Score: 0</div>
+            </div>
+            <button onclick="nextPage(4)">Next</button>
+        </div>
+    </div>
+
+    <div id="page3" class="page">
+        <div class="rose-bg">
+            <h1>🌹 Your Gift 🌹</h1>
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cute gift with roses">
+            <p>Tap the card below to open your special message!</p>
+            <div class="gift-card" onclick="revealGift()">
+                <span id="giftMessage" class="hidden">i love u so much
+💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋
+🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗🤗</span>
+            </div>
+            <button onclick="nextPage(4)">Next</button>
+        </div>
+    </div>
+
+    <div id="page4" class="page">
+        <div class="rose-bg">
+            <h1>🐼 Panda's Sweet Surprise! 🐼</h1>
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cute panda with chocolates and flowers">
+            <p>Help the panda collect chocolates and flowers! Click on the falling items to feed the panda and score points in 15 seconds. The panda is holding chocolates and a bouquet of roses, lilies, and tulips!</p>
+            <div class="panda-game-area" id="pandaGameArea">
+                <img src="https://i.imgur.com/8Q8Z8Z8.png" alt="Big Panda holding chocolates and bouquet of flowers" class="panda"> <!-- Placeholder panda image; replace with a real one showing a panda holding chocolates and flowers -->
+                <div id="pandaScore">Score: 0</div>
+            </div>
+            <button onclick="nextPage(5)">Next</button>
+        </div>
+    </div>
+
+    <div id="page5" class="page">
+        <div class="rose-bg">
+            <h1>🌹 Thanksgiving Letter 🌹</h1>
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cute thanksgiving with roses">
+            <p>May Allah bless you, my princess. Since I got you in my life, I started smiling again. I wanna make our life full of happiness and joy and will recreate all the cute things we saw and decided to do. I'm really sorry that I made you down or made you upset. You are my everything, please don't leave me alone. I really can't lose you at any cost. I can't give you any gift, and I will try my best to be such a good person for everyone. I promise.</p>
+            <button onclick="nextPage(1)">Start Over</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let score = 0;
+        let pandaScore = 0;
+        let gameInterval;
+        let pandaGameInterval;
+        let items = [];
+        let pandaItems = [];
+
+        function nextPage(page) {
+            document.getElementById('page' + currentPage).classList.remove('active');
+            currentPage = page;
+            document.getElementById('page' + currentPage).classList.add('active');
+            if (page === 2) startGame();
+            if (page === 4) startPandaGame();
+        }
+
+        function startGame() {
+            score = 0;
+            document.getElementById('score').innerText = 'Score: 0';
+            items.forEach(item => item.remove());
+            items = [];
+            gameInterval = setInterval(() => {
+                const item = document.createElement('div');
+                item.className = 'falling-item';
+                item.innerText = Math.random() > 0.5 ? '💋' : '❤️';
+                item.style.left = Math.random() * 350 + 'px';
+                item.addEventListener('click', () => {
+                    score++;
+                    document.getElementById('score').innerText = 'Score: ' + score;
+                    item.remove();
+                });
+                document.getElementById('gameArea').appendChild(item);
+                items.push(item);
+                setTimeout(() => item.remove(), 3000);
+            }, 500);
+            setTimeout(() => clearInterval(gameInterval), 10000);
+        }
+
+        function startPandaGame() {
+            pandaScore = 0;
+            document.getElementById('pandaScore').innerText = 'Score: 0';
+            pandaItems.forEach(item => item.remove());
+            pandaItems = [];
+            pandaGameInterval = setInterval(() => {
+                const item = document.createElement('div');
+                item.className = 'collect-item';
+                item.innerText = Math.random() > 0.5 ? '🍫' : '🌸'; // Chocolates or flowers
+                item.style.left = Math.random() * 450 + 'px';
+                item.style.top = Math.random() * 200 + 'px';
+                item.addEventListener('click', () => {
+                    pandaScore++;
+                    document.getElementById('pandaScore').innerText = 'Score: ' + pandaScore;
+                    item.remove();
+                });
+                document.getElementById('pandaGameArea').appendChild(item);
+                pandaItems.push(item);
+                setTimeout(() => item.remove(), 4000);
+            }, 600);
+            setTimeout(() => clearInterval(pandaGameInterval), 15000);
+        }
+
+        function revealGift() {
+            document.getElementById('giftMessage').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
